@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "HEALTHCARE-CHATBOT"
+version = "0.1.0"
+description = ""
+authors = ["Amrita Thakur <thakuramrita725@gmail.com>"]
+readme = "README.md"
+packages = [{include = "src"},
+            {include = "config"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.39.0"
+python-dotenv = "^1.0.1"
+langchain-community = "^0.3.3"
+pypdf = "^5.0.1"
+langchain-groq = "^0.2.0"
+langchain-huggingface = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
