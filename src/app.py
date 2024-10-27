@@ -36,8 +36,8 @@ def load_and_split_documents(chunk_size: int = 500, chunk_overlap: int = 50):
     try:
         directory_path = "../data"
         if not os.path.isdir(directory_path):
-            logger.error("Directory path does not exist on the file system.")
-            raise ValueError("Directory path not found.")
+            logger.error(f"Directory path does not exist: {directory_path}")
+            raise ValueError(f"Directory path not found: {directory_path}")
         
         logger.info(f"Loading PDF documents from directory: {directory_path}")
         pdf_loader = DirectoryLoader(directory_path, glob="*.pdf", loader_cls=PyPDFLoader)
