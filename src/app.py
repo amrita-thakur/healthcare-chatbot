@@ -20,7 +20,7 @@ load_dotenv(override=True)
 
 # Initialize logging configuration
 log_config = LoggingConfig()
-logger = log_config.setup_logging(logger_name="healthcare_chatbot", folder_name="healthcare_chatbot", deploy_env=os.getenv("DEPLOY_ENV"))
+logger = log_config.setup_logging(logger_name="healthcare_chatbot", folder_name="healthcare_chatbot", deploy_env=st.secrets("DEPLOY_ENV"))
 
 def load_and_split_documents(chunk_size: int = 500, chunk_overlap: int = 50):
     """
@@ -34,7 +34,7 @@ def load_and_split_documents(chunk_size: int = 500, chunk_overlap: int = 50):
         list: List of document chunks.
     """
     try:
-        directory_path = os.getenv('DIRECTORY_PATH')
+        directory_path = st.secrets('DIRECTORY_PATH')
         print("directory_path")
         print(directory_path)
         if not directory_path:
@@ -68,16 +68,16 @@ def initialize_models_and_store(document_chunks: list):
         tuple: Language model and vector retriever.
     """
     try:
-        groq_api_key = os.getenv('GROQ_API_KEY')
+        groq_api_key = st.secrets('GROQ_API_KEY')
         if not groq_api_key:
             logger.error("GROQ API key not found in environment variables.")
             raise ValueError("GROQ API key not found.")
         
         logger.info("Initializing language model.")
-        groq_model_name = os.getenv('GROQ_MODEL_NAME')
+        groq_model_name = st.secrets('GROQ_MODEL_NAME')
         language_model = ChatGroq(groq_api_key=groq_api_key, model_name=groq_model_name)
 
-        embedding_model_name = os.getenv("EMBEDDING_MODEL_NAME")
+        embedding_model_name = st.secrets("EMBEDDING_MODEL_NAME")
         logger.info(f"Initializing embedding model with model name: {embedding_model_name}")
         embeddings_model = HuggingFaceEmbeddings(model_name=embedding_model_name, model_kwargs={'device': "cpu"})
 
