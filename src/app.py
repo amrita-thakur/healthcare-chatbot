@@ -35,8 +35,6 @@ def load_and_split_documents(chunk_size: int = 500, chunk_overlap: int = 50):
     """
     try:
         directory_path = st.secrets('DIRECTORY_PATH')
-        print("directory_path")
-        print(directory_path)
         if not directory_path:
             logger.error("Directory path not found in environment variables.")
             raise ValueError("Directory path not found.")
