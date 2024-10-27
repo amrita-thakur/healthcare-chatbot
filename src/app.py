@@ -35,8 +35,8 @@ def load_and_split_documents(chunk_size: int = 500, chunk_overlap: int = 50):
     """
     try:
         directory_path = "../data"
-        if not directory_path:
-            logger.error("Directory path not found in environment variables.")
+        if not os.path.isdir(directory_path):
+            logger.error("Directory path does not exist on the file system.")
             raise ValueError("Directory path not found.")
         
         logger.info(f"Loading PDF documents from directory: {directory_path}")
